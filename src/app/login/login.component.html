@@ -1,0 +1,18 @@
+<h2 style="color: white;" >{{data}}</h2>
+<p>login works!</p>
+
+<div class="container w-50 text-center rounded-3 border border-white border-radious-2">
+
+    <h1 class="p-3 mt-5" style="color: white;">login</h1>
+    <form action="">
+        <div class="container w-75 p-4 mt-3">
+            <input type="text" id="inputusername" (change)="acnoChange($event)" class="form-control " style="background-color: rgba(153, 149, 149, 0.404);" [placeholder]="inputplaceholder">
+        </div>
+        <div class=" container p-4 mt-3 w-75">
+            <input type="password" id="inputpassword" (change)="passChange($event)" class="form-control "style="background-color: rgba(153, 149, 149, 0.404);" placeholder="password">
+        </div>
+        <div class="p-3 mt-4 ">
+            <button class="btn btn-primary p-2 mt-2 mb-2 w-50" type="button" (click)="login1()" >Login</button>
+        </div>
+    </form>
+</div>
