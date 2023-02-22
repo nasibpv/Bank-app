@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -8,24 +11,19 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   // acno=''
-  acnumber:any
-  password:any
+  // acnumber:any  [[ngmodel]]
+  // password:any
 
   // data="Your perfect banking partner"
 
   // inputplaceholder="Accound number"
 
-  userdetails:any={
-    1000:{acno:1000,username:"anu",password:"abc123",balance:0},
-    1001:{acno:1001,username:"zayn",password:"abc123",balance:0},
-    1002:{acno:1002,username:"akil",password:"abc123",balance:0},
-    1003:{acno:1003,username:"nail",password:"abc123",balance:0},
-  }
-  constructor(){}
+ 
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder){}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {  }
+
+
 
   // login1(){
   //   var acnum=this.acno
@@ -69,31 +67,55 @@ export class LoginComponent implements OnInit {
   //   // console.log(this.acno);
   // }
 // ------------------------------------------
+// dependancy injection FormBuilder
 
+// model form create  (reactive form Module(app.module.ts))
+loginForm=this.fb.group({
+  acno:['',[Validators.required,Validators.pattern('[0-9]+')]],  //
+  psw:['',[Validators.required,Validators.pattern('[a-z A-z 0-9]+')]]
+  // validator is class, [] is rule
+})
 
-login1(){
-    var acnum=this.acnumber
-    console.log(acnum);
+login(){
+    var acnum=this.loginForm.value.acno   
+    var paswd=this.loginForm.value.psw
+    if(this.loginForm.valid){
+      // loginForm is valid true
+    const result=this.ds.login(acnum,paswd)
     
-    var paswd=this.password
-    var userdetails1=this.userdetails
-
-    if(acnum in userdetails1){
-      if(paswd==userdetails1[acnum]["password"]){
-        alert("login success")
-      }
-      else{
-        alert("incurrect password")
-      }
+    
+    if(result){
+     alert('login success')
+     this.router.navigateByUrl('dashboard')     
     }
     else{
-      alert("acno incurrect or not registered")
+      // false
+      alert('incurrect acno or password')
     }
   }
-  // --------------------------------
+  else{
+    alert('invalid form')
+  }
+  //   var userdetails1=this.ds.userdetails
+
+  //   if(acnum in userdetails1){
+  //     if(paswd==userdetails1[acnum]["password"]){
+  //       alert("login success")
+  //       this.router.navigateByUrl('dashboard')
+  //     }
+  //     else{
+  //       alert("incurrect password")
+  //     }
+  //   }
+  //   else{
+  //     alert("acno incurrect or not registered")
+  //   }
+  // }
+  // // --------------------------------
 
   // passChange(event:any){
   //   this.password=event.target.value
   //   // console.log(this.password);
   // }
+}
 }

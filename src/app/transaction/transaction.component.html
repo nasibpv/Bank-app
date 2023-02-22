@@ -1,0 +1,21 @@
+<p>transaction works!</p>
+
+<div class="container w-50 text-center rounded text-white">
+    <h2>Transaction History</h2>
+    <table class=" w-100  text-white  bg-dark">
+       <thead class="bg-secondary p-2 mb-4">
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+            </tr>
+       </thead >
+         <!--structural directives  -->
+     <tbody *ngFor="let i of transactionData ">
+            <tr>
+                <td>{{i.Type}}</td>
+                <td>{{i.Amount}}</td>
+            </tr>
+            
+     </tbody>
+    </table>
+</div>

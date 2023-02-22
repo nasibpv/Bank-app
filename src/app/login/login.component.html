@@ -4,15 +4,17 @@
 <div class="container w-50 text-center rounded-3 border border-white border-radious-2">
 
     <h1 class="p-3 mt-5" style="color: white;">login</h1>
-    <form action="">
+    <form action="" [formGroup]="loginForm" (ngSubmit)="login()">
+        <!-- [FormGroup]=form tag , loginForm = model form name -->
         <div class="container w-75 p-4 mt-3">
-            <input type="text" name="username" [(ngModel)]='acnumber' id="inputusername" class="form-control " style="background-color: rgba(153, 149, 149, 0.404);" placeholder="username">
+            <input type="text" formControlName="acno" name="acno"  id="inputusername" class="form-control " style="background-color: rgba(153, 149, 149, 0.404);" placeholder="ac_no">
         </div>
         <div class=" container p-4 mt-3 w-75">
-            <input type="password" name="password" [(ngModel)]='password' id="inputpassword"  class="form-control "style="background-color: rgba(153, 149, 149, 0.404);" placeholder="password">
+            <input type="password" formControlName="psw" name="password"  id="inputpassword"  class="form-control "style="background-color: rgba(153, 149, 149, 0.404);" placeholder="password">
         </div>
         <div class="p-3 mt-4 ">
-            <button class="btn btn-primary p-2 mt-2 mb-2 w-50" type="button" (click)="login1()">Login</button>
+            <button class="btn btn-primary p-2 mt-2 mb-2 w-50" type="submit" >Login</button>
         </div>
     </form>
+    <a href="" style="text-decoration: none; color: aliceblue; " routerLink="register"><strong>Register</strong></a>
 </div>

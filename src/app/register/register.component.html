@@ -1,0 +1,60 @@
+
+<div  class="container w-25">
+<form [formGroup]="registerForm" ac class="row g-2" (ngSubmit)=" register() ">
+    <div class="col-md-12">
+      <label for="validationDefault01" class="form-label">Name</label>
+      <input formControlName="uname" type="text" class="form-control"  name="name" id="validationDefault01"  >
+    </div>
+    <div *ngIf="this.registerForm.get('uname')?.errors && this.registerForm.get('uname')?.touched">
+      <p class="text-danger">accept only charecters</p>
+    </div>
+    <div class="col-md-12">
+      <label for="validationDefault02" class="form-label">accound number</label>
+      <input formControlName="acno" type="text" class="form-control"  name="acnumm" id="validationDefault02"  >
+    </div>
+    <div *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched">
+      <p class="text-danger">accept only number</p>
+    </div>
+    
+    <!-- [(ngModel)]='uname'
+    [(ngModel)]='acnum'
+    [(ngModel)]='psw' -->
+
+    <!-- <div class="col-md-12">
+      <label for="validationDefaultUsername" class="form-label">Username</label>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+        <input type="text" class="form-control"name="user" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+      </div>
+    </div> -->
+    <div class="col-md-12">
+      <label for="validationDefault03" class="form-label">password</label>
+      <input formControlName="psw" type="password" class="form-control"  name="password" id="validationDefault03" >
+    </div>
+    <div *ngIf="this.registerForm.get('psw')?.errors && this.registerForm.get('psw')?.touched">
+      <p class="text-danger">accept only number and charecters</p>
+    </div>
+    <!-- <div class="col-md-5">
+      <label for="validationDefault04" class="form-label">State</label>
+      <select class="form-select" id="validationDefault04" required>
+        <option selected disabled value="">Choose...</option>
+        <option>...</option>
+      </select>
+    </div> -->
+    <!-- <div class="col-md-3">
+      <label for="validationDefault05" class="form-label">password</label>
+      <input type="text" name="password" class="form-control" id="validationDefault05" required>
+    </div> -->
+    <!-- <div class="col-12"> -->
+      <!-- <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2 " name="" required>
+        <label class="form-check-label" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div> -->
+    <!-- </div> -->
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit"  >Submit form</button>
+    </div>
+  </form>
+</div>

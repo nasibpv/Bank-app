@@ -1,0 +1,11 @@
+<!-- <p>delete-confirm works!</p> -->
+
+<!-- *ngIf is directives  (true-div work)-->
+<div *ngIf="item" class="container w-25 text-center mb-3 rounded p-3">
+    <h3>Are You sure</h3>
+    <h6>Do You Want to Delete Your Bank Account? {{item}}</h6>
+
+    <button class="btn btn-danger">Yes</button>
+    <button (click)="oncancel()" class="btn btn-danger ms-2">No</button>
+
+</div>
