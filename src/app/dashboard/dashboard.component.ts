@@ -20,11 +20,13 @@ export class DashboardComponent implements OnInit {
   // psw1:any
   // amt1:any
   constructor(private ds:DataService,private fb:FormBuilder,private router:Router){
-    this.user=this.ds.currentuser
-    this.datedetails= new Date
+    if(localStorage.getItem("currentUser")){
+    this.user=JSON.parse(localStorage.getItem("currentUser")||"")
+    }
+    this.datedetails= new Date()
   }
   ngOnInit(): void {
-  if(!localStorage.getItem("currentuser")){
+  if(!localStorage.getItem("token")){
     alert('please login')
     this.router.navigateByUrl("")
   }
@@ -47,44 +49,57 @@ var acno=this.depositform.value.acno
 var psw=this.depositform.value.psw
 var amt=this.depositform.value.amt
 if(this.depositform.valid){
-const result=this.ds.deposit(acno,psw,amt)
-    if(result){
-      alert(`your ac has been creadited with amount ${amt},and the current balance is ${result}`)
-      // console.log(result);
-      
-    }
-    else{
-      alert('incurrect acno or password')
-    }
-  }
-  else{
-    alert('invalid form')
-  }
-}
 
-  withdraw(){
+this.ds.deposit(acno,psw,amt).subscribe((result:any)=>{
+  alert(result.message)
+},
+result=>{
+  alert(result.error.message)
+}
+)
+//     if(result){
+//       alert(`your ac has been creadited with amount ${amt},and the current balance is ${result}`)
+//       // console.log(result);
+      
+//     }
+//     else{
+//       alert('incurrect acno or password')
+//     }
+//   }
+  
+
+}
+else{
+  alert('invalid form')
+}
+  }
+
+withdraw(){
     var acno1=this.withdrawform.value.acno1
     var psw1=this.withdrawform.value.psw1
     var amt1=this.withdrawform.value.amt1
     if(this.withdrawform.valid){
-   const result=this.ds.withdraw(acno1,psw1,amt1)
-    if(result){
-      alert(`your ac has been debit with amount ${amt1},and the current balance is ${result}`)
-    }
-    else{
-      alert('incurrect acno or password')
-    }
+   this.ds.withdraw(acno1,psw1,amt1).subscribe((result:any)=>{
+    alert(result.message)
+   },
+   result=>{
+    alert(result.error.mesaage)
+   })
+   
+    
   }
-
   else{
     alert('invalidform')
   }
   }
 
+  // ______________________________________
+  
   logout(){
     localStorage.removeItem("currentuser")
     localStorage.removeItem("currentAcno")
-    this.router.navigateByUrl('')
+    localStorage.removeItem("token")
+    this.router.navigateByUrl("")
   }
 
   deleteParent(){
@@ -94,6 +109,18 @@ const result=this.ds.deposit(acno,psw,amt)
   }
   cancel(){
     this.acno=''
+  }
+  Delete(event:any){
+    // alert(event)
+    this.ds.deleteAcc(event).subscribe((result:any)=>{
+      alert(result.message)
+      // this.router.navigateByUrl("")
+      this.logout()
+    },
+    result=>{
+      alert(result.error.mesaage)
+    })
+
   }
 }
 

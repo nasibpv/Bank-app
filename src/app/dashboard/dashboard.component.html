@@ -1,11 +1,11 @@
 
 <!-- Delect Conform selector -->
-<app-delete-confirm (onCancel)="cancel()" [item]="acno"></app-delete-confirm>
+<app-delete-confirm (ondelete)="Delete($event)" (onCancel)="cancel()" [item]="acno"></app-delete-confirm>
 <!-- [item]:- child resive variable  "acno":-parent share data  -->
 
 <h1>Welcome {{user}}</h1>
 
-<div class="text-black mt-2 text center">
+<div class="text-white mt-2 text-center">
     <h5>{{datedetails | date:'short'}}</h5>
 </div>
 <div class=" p-2 ms-2 w-25 text-center rounded-pill " style="color: aliceblue;  background-color:rgba(0, 0, 0, 0.507); border: 2px solid rgb(125, 91, 91);">
@@ -14,14 +14,14 @@
 </div >
 <div class="text-center first me-5">
     <button class="btn btn-dark me-2 p-2 " type="button" (click)="deleteParent()" style="color: aliceblue;  background-color:rgba(0, 0, 0, 0.507); border: 2px solid rgb(125, 91, 91);">delete</button>
-    <button class="btn btn-dark  p-2 " type="button" (click)="deleteParent()" style="color: aliceblue;  background-color:rgba(0, 0, 0, 0.507); border: 2px solid rgb(125, 91, 91);">logout</button>
+    <button class="btn btn-dark  p-2 " type="button" (click)="logout()" style="color: aliceblue;  background-color:rgba(0, 0, 0, 0.507); border: 2px solid rgb(125, 91, 91);">logout</button>
 
 </div>   
 <div class="container w-75 p-2 mt-5">
     <div  [ngClass]="acno?'style':''" class="row text-center ">
         <!-- [ngclass:-attribue directives] -->
         <div class="col-5 p-3 main">
-            <form action="" [formGroup]="depositform">
+            <form action="" [formGroup]="depositform" (ngSubmit)="deposit()">
             <h1>Deposit</h1>
             <div>
                 <input type="text" formControlName="acno" name="acnode" id="acno1" class="form-control p-2 mb-4  " placeholder="enter acno">
@@ -32,12 +32,12 @@
             <div>
                 <input type="text" formControlName="amt" name="amountde" id="amount1" class="form-control p-2 mb-4 " placeholder="amount">
             </div>
-            <button class="btn btn-primary p-2" type="button" (click)="deposit()">deposit</button>
+            <button class="btn btn-primary p-2" type="submit" >deposit</button>
         </form>
         </div>
         <div class="col-2"></div>
         <div class="col-5 p-3 main">
-            <form action="" [formGroup]="withdrawform">
+            <form action="" [formGroup]="withdrawform" (ngSubmit)="withdraw()">
             <h1>Withdraw</h1>
             <div>
                 <input type="text" formControlName="acno1"name="acnow1" id="acno2" class="form-control p-2 mb-4 w- " placeholder="enter acno">
@@ -48,7 +48,7 @@
             <div>
                 <input type="text" formControlName="amt1" name="amonwi" id="amount2" class="form-control p-2 mb-4 " placeholder="amount">
             </div>
-            <button class="btn btn-primary p-2" type="button" (click)="withdraw()">withdraw</button>
+            <button class="btn btn-primary p-2" type="submit">withdraw</button>
         </form>
         </div>
     </div>

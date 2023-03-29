@@ -81,17 +81,27 @@ login(){
     var paswd=this.loginForm.value.psw
     if(this.loginForm.valid){
       // loginForm is valid true
-    const result=this.ds.login(acnum,paswd)
+    this.ds.login(acnum,paswd).subscribe((result:any)=>{
+      localStorage.setItem("currentUser",JSON.stringify(result.currentuser))
+      localStorage.setItem("currentAcno",JSON.stringify(result.currentAcno))
+      localStorage.setItem("token",JSON.stringify(result.token))
+
+      alert(result.message)
+      this.router.navigateByUrl('dashboard')
+    },
+    result=>{
+      alert(result.error.message)
+    })
     
     
-    if(result){
-     alert('login success')
-     this.router.navigateByUrl('dashboard')     
-    }
-    else{
-      // false
-      alert('incurrect acno or password')
-    }
+    // if(result){
+    //  alert('login success')
+    //  this.router.navigateByUrl('dashboard')     
+    // }
+    // else{
+    //   // false
+    //   alert('incurrect acno or password')
+    // }
   }
   else{
     alert('invalid form')

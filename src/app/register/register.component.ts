@@ -38,14 +38,22 @@ export class RegisterComponent implements OnInit {
     var password = this.registerForm.value.psw
 
     if (this.registerForm.valid) {
-      const result = this.ds.register(acname, acno, password)
-      if (result) {
-        alert('registered')
-        this.router.navigateByUrl('')
+      this.ds.register(acname, acno, password).subscribe((result:any)=>{
+        alert(result.message)
+        this.router.navigateByUrl("")
+      },
+      result=>{
+        alert(result.error.message)
+        this.router.navigateByUrl("")
       }
-      else {
-        alert('acno is already present')
-      }
+      )
+      // if (result) {
+      //   alert('registered')
+      //   this.router.navigateByUrl('')
+      // }
+      // else {
+      //   alert('acno is already present')
+      // }
     }
     else {
       alert('invalid form')
