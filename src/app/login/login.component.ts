@@ -90,6 +90,8 @@ login(){
       this.router.navigateByUrl('dashboard')
     },
     result=>{
+      console.log(result);
+      
       alert(result.error.message)
     })
     
